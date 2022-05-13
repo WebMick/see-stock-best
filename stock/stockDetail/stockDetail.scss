@@ -1,0 +1,39 @@
+.stockDetail{
+	.titleBox{
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		.title{
+			font-size: 32rpx;
+		}
+		.subTitle{
+			font-size: 20rpx;
+			color: #606266;
+			margin-top: 12rpx;
+		}
+	}
+	.mBox{
+		background: #fff;
+		margin-top: 24rpx;
+		padding: 0 24px;
+	}
+	.subpageBox{
+		position: fixed;	
+		left: 0;
+		width: 100%;
+		z-index: 99;
+		transition: all .5s;
+	}
+	.insetBottom{
+		position: fixed;
+		left: 0;
+		bottom: 0;
+		box-sizing: content-box;
+		width: 100%;
+		padding-bottom: env(safe-area-inset-bottom);
+		background-color: #fff;
+		z-index: 100;
+	}
+}

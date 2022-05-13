@@ -1,0 +1,71 @@
+.stock{
+	display: flex;
+	position: relative;
+	flex-direction: column;
+	.navbar{
+		background-color: #fff;
+		.firstTabs{
+			padding: 0 32rpx;
+		}
+	}
+	.marketBox{
+		background: #fff;
+		border-bottom: #f4f5f6 solid 1px;
+	}
+	.guessDataBox{
+		background: #fff;
+		padding: 0 32rpx;
+	}
+	.secondTabs{
+		background: #fff;
+		border-bottom: #f4f5f6 solid 1px;
+		padding: 0 32rpx;
+	}
+	.main{
+		flex: 1;
+		position: relative;
+		border-bottom: #f4f5f6 solid 1px;
+		background-color: #fff;
+		.swiper{
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			.swiperItem{
+				
+			}
+		}
+	}
+	.smallRedEven{
+		position: fixed;
+		top: 58%;
+		right: 0px;
+		z-index: 999;
+		width: 120rpx;
+		height: 132rpx;
+		animation: smallRedEvenAni 1.3s .5s ease-in-out;
+		.icon{
+			display: block;
+			width: 100%;
+			height: 100%;
+		}
+	}
+	@keyframes smallRedEvenAni{
+		0%,100%,50% {
+		    transform: rotate(0deg);
+		}
+		10% {
+		    transform: rotate(5deg);
+		}
+		20% {
+		    transform: rotate(-5deg);
+		}
+		30% {
+		    transform: rotate(5deg);
+		}
+		40% {
+		    transform: rotate(-5deg);
+		}
+	}
+}

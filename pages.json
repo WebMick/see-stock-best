@@ -1,0 +1,81 @@
+{
+	"easycom": {
+		"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+	},
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+		    "path" : "login/login",
+		    "style": {
+		    	"navigationStyle": "custom",
+		    	"app-plus":{
+		    		"titleView":false
+		    	}
+		    }
+		},
+        {
+            "path" : "pages/stock/stock",
+            "style": {
+            	"navigationStyle": "custom",
+            	"app-plus":{
+            		"titleView":false
+            	}
+            }
+        }
+        ,{
+            "path" : "pages/user/user",
+            "style": {
+            	"navigationStyle": "custom",
+            	"app-plus":{
+            		"titleView":false
+            	}
+            }
+        }
+        ,{
+            "path" : "user/myRecord/myRecord",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "stock/stockDetail/stockDetail",
+            "style" :                                                                                    
+            {
+                "navigationStyle": "custom",
+                "app-plus":{
+                	"titleView":false
+                }
+            }
+            
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#f4f5f6"
+	},
+    "tabBar": {
+		"custom": true,
+        "color": "#303133",
+        "selectedColor": "#316DF6",
+        "backgroundColor": "#ffffff",
+        "borderStyle": "white",
+        "list": [ 
+            {
+                "pagePath": "pages/stock/stock",
+                "iconPath": "./static/images/stock.png",                 
+                "selectedIconPath": "./static/images/stock-act.png",
+                "text": "自选"
+            },
+            {
+                "pagePath": "pages/user/user",
+                "iconPath": "./static/images/user.png",                
+                "selectedIconPath": "./static/images/user-act.png",
+                "text": "我的"
+            }
+        ]
+    }
+}
