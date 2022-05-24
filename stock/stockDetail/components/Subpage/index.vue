@@ -101,6 +101,7 @@
 				this.tabList[type].activeId = id;
 			},
 			swiperChange(e){
+				let { type } = this;
 				let { detail: { current } } = e;
 				this.tabList[type].activeId = current;
 				if(current == 0){

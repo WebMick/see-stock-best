@@ -2,7 +2,9 @@
 	<view class="history">
 		<scroll-view class="list" scroll-y="true" >
 			<StockList :list="list"></StockList>
-			<view class="tips">清空浏览记录</view>
+			<template v-if="list && list.length > 0">
+				<view class="tips" @click="clearHistory">清空浏览记录</view>
+			</template>
 		</scroll-view>
 	</view>
 </template>
@@ -22,7 +24,22 @@
 			}
 		},
 		methods:{
-			
+			clearHistory(){
+				uni.showModal({
+					content: '清空当前的浏览记录吗？',
+					success: (res) => {
+						let { confirm, cancel } = res;
+						if(confirm){
+							this.$api.favorHistoryDetailDel({is_all: 1}).then(res =>{
+								this.$emit('clearHistory');
+							});
+						}
+						else if(cancel){
+							
+						}
+					}
+				})
+			}
 		}
 	}
 </script>
@@ -38,7 +55,7 @@
 			color: #909399;
 			text-align: center;
 			line-height: 3;
-			font-size: 26rpx;
+			font-size: 24rpx;
 		}
 	}
 </style>

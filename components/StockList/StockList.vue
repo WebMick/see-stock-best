@@ -1,34 +1,43 @@
 <template>
 	<view class="list">
-		<template v-for="(item, index) in list">
-			<view class="item" :class="{showOptions: showOptions}" @click="clickItem(item)">
-				<view class="checkBox" v-if="showCheck" @click.stop="check(item, index)">
-					<image v-if="!item.isCheck && checkLength < 3" :src="$imgUrl('/images/equities/product/202203301057439318.png')" class="icon" mode=""></image>
-					<image v-if="item.isCheck" :src="$imgUrl('/images/equities/product/202203301058109310.png')" class="icon" mode=""></image>
-					<image v-if="checkLength >= 3 && !item.isCheck" :src="$imgUrl('/images/equities/product/202203301058183691.png')" class="icon" mode=""></image>
+		<template v-if="list && list.length >0">
+			<template v-for="(item, index) in list">
+				<view class="item" :class="{showOptions: showOptions}" @click="clickItem(item)">
+					<view class="checkBox" v-if="showCheck" @click.stop="check(item, index)">
+						<image v-if="!item.isCheck && checkLength < 3" :src="$imgUrl('/images/equities/product/202203301057439318.png')" class="icon" mode=""></image>
+						<image v-if="item.isCheck" :src="$imgUrl('/images/equities/product/202203301058109310.png')" class="icon" mode=""></image>
+						<image v-if="checkLength >= 3 && !item.isCheck" :src="$imgUrl('/images/equities/product/202203301058183691.png')" class="icon" mode=""></image>
+					</view>
+					<view class="info">
+						<view class="name">{{item.equities_name}}</view>
+						<view class="code">{{item.equities_code}}</view>
+					</view>
+					<view class="new fontRegular" :class="[$setClass(item.fluctuate_val)]">{{item.newing}}</view>
+					<view class="ratio fontRegular" :class="[$setClass(item.fluctuate_val)]">{{$setAddSymbol(item.fluctuate_val)}}%</view>
+					<view class="options" v-if="showOptions">
+						<template v-if="!item.user_guess">
+							<view class="btnItem"
+								v-for="(oItem, oIndex) in options"
+								:key="oIndex"
+								@click.stop="action(item, oItem)"
+								:class="{guessEd: item.user_guess}"
+								>
+								{{oItem.text}}
+							</view>
+						</template>
+						<template v-if="item.user_guess">
+							<view class="btnItem guessEd">猜了({{item.user_guess == 1 ? '涨' : '跌'}})</view>
+						</template>
+					</view>
 				</view>
-				<view class="info">
-					<view class="name">{{item.equities_name}}</view>
-					<view class="code">{{item.equities_code}}</view>
-				</view>
-				<view class="new fontRegular" :class="[$setClass(item.fluctuate_val)]">{{item.newing}}</view>
-				<view class="ratio fontRegular" :class="[$setClass(item.fluctuate_val)]">{{$setAddSymbol(item.fluctuate_val)}}%</view>
-				<view class="options" v-if="showOptions">
-					<template v-if="!item.user_guess">
-						<view class="btnItem"
-							v-for="(oItem, oIndex) in options"
-							:key="oIndex"
-							@click.stop="action(item, oItem)"
-							:class="{guessEd: item.user_guess}"
-							>
-							{{oItem.text}}
-						</view>
-					</template>
-					<template v-if="item.user_guess">
-						<view class="btnItem guessEd">猜了({{item.user_guess == 1 ? '涨' : '跌'}})</view>
-					</template>
-				</view>
-			</view>
+			</template>
+		</template>
+		<template v-else>
+			<Empty 
+				height="500rpx"
+				title="暂无浏览记录"
+				subTitle="请先添加更多自选股"
+				/>
 		</template>
 	</view>
 </template>

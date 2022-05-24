@@ -41,7 +41,6 @@
 		},
 		methods:{
 			async init(){
-				this.fontSize = 14;
 				let { canvasId, pixelRatio } = this;
 				let canvasDom = await this.getCanvasDom(canvasId[0]);
 				let {width, height, node} = canvasDom;
@@ -51,7 +50,6 @@
 				height = height * pixelRatio;
 				canvas.width  = width;
 				canvas.height = height;
-				
 				this.canvasWidth = width;
 				this.canvasHeight = height;
 			},

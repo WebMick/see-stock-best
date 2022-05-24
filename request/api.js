@@ -172,6 +172,14 @@ const companyBulletinList = (data) => {
 	})
 }
 
+const favorHistoryDetailDel = (data) => {
+	return request({
+		url: '/favor/history/detailDel', 
+		data
+	})
+}
+
+
 
 const api = {
 	login,
@@ -195,7 +203,8 @@ const api = {
 	equityBigInfo,
 	equityBriefInfo,
 	equityNewsList,
-	companyBulletinList
+	companyBulletinList,
+	favorHistoryDetailDel
 }
 
 export{

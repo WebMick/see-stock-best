@@ -34,7 +34,10 @@
 				<swiper class="swiper" :indicator-dots="false" :current="swiperCurrent" :autoplay="false"  @change="swiperChange">
 					<swiper-item v-for="(item, index) in swiperTabsList" class="swiperItem" :class="'swiperItem' + index.id" :key="index">
 						<template v-if="item.id == 1">
-							<History :list="historyListData"></History>
+							<History 
+								:list="historyListData"
+								@clearHistory="init()"
+								/>
 						</template>
 						<template v-if="item.id == 2">
 							<Stock 
@@ -132,8 +135,8 @@
 					{ name: '市场', id: 4, hide: true },
 					{ name: '线索', id: 5, hide: true }
 				],
-				swiperCurrent: 4,
-				tabsCurrent: 5,
+				swiperCurrent: 0,
+				tabsCurrent: 1,
 				stockListParams: {
 					page: 1,
 					page_size: 15,
