@@ -2,7 +2,7 @@
 	<view class="cluesList">
 		<ContentHead title="热门组合" moreText="查看更多" />
 		<view class="list">
-			<CluesList :list="list"></CluesList>
+			<CluesList :list="list" @action="action"></CluesList>
 		</view>
 		<view class="tips" v-if="list && list.length > 0">查看更多线索</view>
 	</view>
@@ -23,7 +23,9 @@
 			}
 		},
 		methods:{
-			
+			action(){
+				this.$emit('action');
+			}
 		}
 	}
 </script>

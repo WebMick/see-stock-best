@@ -22,7 +22,8 @@
 			</view>
 			<view class="actionBox">
 				<CluesActions 
-					:sData.sync="item"
+					:sData="item"
+					@action="action"
 					/>
 			</view>
 			
@@ -41,22 +42,7 @@
 		},
 		methods: {
 			action(type){
-				let { sData } = this;
-				let { id } = sData;
-				let params = {
-					id,
-					type
-				};
-				this.$api.cluesAction(params).then(res => {
-					let { data } = res;
-					let newSData = {
-						...sData,
-						...data
-					}
-					console.log({newSData})
-					this.$emit('update:sData', newSData)
-				});
-				
+				this.$emit('action')
 			}
 		}
 	}

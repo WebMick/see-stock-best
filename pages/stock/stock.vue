@@ -63,6 +63,7 @@
 						<template v-if="item.id == 5">
 							<Clues 
 								:cluesListData="cluesListData"
+								@action="cluesList"
 								/>
 						</template>
 					</swiper-item>

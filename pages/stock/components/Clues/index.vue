@@ -8,6 +8,7 @@
 				/> 
 			<CluesList 
 				:list="cluesListData.list"
+				@action="action"
 				/>
 		</scroll-view>
 	</view>
@@ -39,6 +40,9 @@
 		methods:{
 			clickNav(type){
 				
+			},
+			action(){
+				this.$emit('action');
 			}
 		}
 	}

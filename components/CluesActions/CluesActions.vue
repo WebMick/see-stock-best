@@ -41,13 +41,7 @@
 					type
 				};
 				this.$api.cluesAction(params).then(res => {
-					let { data } = res;
-					let newSData = {
-						...sData,
-						...data
-					}
-					console.log({newSData})
-					this.$emit('update:sData', newSData)
+					this.$emit('action')
 				});
 				
 			}
