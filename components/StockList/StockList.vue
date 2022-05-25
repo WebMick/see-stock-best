@@ -35,8 +35,8 @@
 		<template v-else>
 			<Empty 
 				height="500rpx"
-				title="暂无浏览记录"
-				subTitle="请先添加更多自选股"
+				title="暂无数据"
+				subTitle="请添加更多自选股"
 				/>
 		</template>
 	</view>
