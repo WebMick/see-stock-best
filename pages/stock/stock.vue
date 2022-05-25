@@ -135,8 +135,8 @@
 					{ name: '市场', id: 4, hide: true },
 					{ name: '线索', id: 5, hide: true }
 				],
-				swiperCurrent: 0,
-				tabsCurrent: 1,
+				swiperCurrent: 4,
+				tabsCurrent: 5,
 				stockListParams: {
 					page: 1,
 					page_size: 15,
@@ -315,8 +315,8 @@
 				this.$api.homeData().then(res => {
 					let { data } = res;
 					this.marketStatusData = {
-						...data,
-						...this.marketStatusData
+						...this.marketStatusData,
+						...data
 					};
 					// 红包 每天提醒一次
 					let hasShowRedEven = this.$uniApi.storage().get('hasShowRedEven');
@@ -338,7 +338,7 @@
 						let list = [];
 						pool.map(item => {
 							let { user_guess, code } = item;
-							if(user_guess != 0){
+							if(user_guess && user_guess != 0){
 								list.push(item);
 							}
 							if(code == 'sh000001'){
@@ -346,6 +346,7 @@
 								this.$forceUpdate()
 							}
 						});
+						console.log({list})
 						this.guessListData = list;
 					}
 				})

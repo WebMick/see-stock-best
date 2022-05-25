@@ -1,23 +1,23 @@
 <template>
 	<view class="cluesActions">
-		<view class="btnItem">
+		<view class="btnItem" :class="{act: sData.commendType == 2}" @click="action(2)">
 			<view class="iconBox">
-				<image :src="$imgUrl('/images/equities/product/202201101901181492.png')" v-if="commendType != 2" class="icon" mode=""></image>
-				<image :src="$imgUrl('/images/equities/product/202205131041452153.png')" v-if="commendType == 2" class="icon" mode=""></image>
+				<image :src="$imgUrl('/images/equities/product/202201101901181492.png')" v-if="sData.commendType != 2" class="icon" mode=""></image>
+				<image :src="$imgUrl('/images/equities/product/202205131041452153.png')" v-if="sData.commendType == 2" class="icon" mode=""></image>
 			</view>
-			<view class="text">反对 <text class="num">{{down}}</text></view>
+			<view class="text">反对 <text class="num">{{sData.downCount}}</text></view>
 		</view>
-		<view class="btnItem">
+		<view class="btnItem" :class="{act: sData.commendType == 1}" @click="action(1)">
 			<view class="iconBox">
-				<image :src="$imgUrl('/images/equities/product/202201101901097353.png')" v-if="commendType != 1" class="icon" mode=""></image>
-				<image :src="$imgUrl('/images/equities/product/202205131040557555.png')" v-if="commendType == 1" class="icon" mode=""></image>
+				<image :src="$imgUrl('/images/equities/product/202201101901097353.png')" v-if="sData.commendType != 1" class="icon" mode=""></image>
+				<image :src="$imgUrl('/images/equities/product/202205131040557555.png')" v-if="sData.commendType == 1" class="icon" mode=""></image>
 			</view>
-			<view class="text">支持 <text class="num">{{up}}</text></view>
+			<view class="text">支持 <text class="num">{{sData.upCount}}</text></view>
 		</view>
-		<view class="btnItem" v-if="collection">
+		<!-- <view class="btnItem" v-if="collection">
 			<view class="iconBox"></view>
 			<view class="text">收藏 <text class="num">{{collection}}</text></view>
-		</view>
+		</view> -->
 	</view>
 </template>
 
@@ -25,21 +25,31 @@
 	export default {
 		name:"CluesActions",
 		props: {
-			commendType: {
-				type: [Number, String],
-				default: ''
-			},
-			down: {
-				type: [Number, String],
-				default: ''
-			},
-			up: {
-				type: [Number, String],
-				default: ''
-			},
-			collection: {
-				type: [Number, String],
-				default: ''
+			sData: {
+				type: Object,
+				default: function(){
+					return {}
+				}
+			}
+		},
+		methods: {
+			action(type){
+				let { sData } = this;
+				let { id } = sData;
+				let params = {
+					id,
+					type
+				};
+				this.$api.cluesAction(params).then(res => {
+					let { data } = res;
+					let newSData = {
+						...sData,
+						...data
+					}
+					console.log({newSData})
+					this.$emit('update:sData', newSData)
+				});
+				
 			}
 		}
 	}
@@ -56,6 +66,9 @@
 			align-items: center;
 			justify-content: center;
 			color: #8694AA;
+			&.act{
+				color: #D9A23E;
+			}
 			.iconBox{
 				width: 64rpx;
 				height: 64rpx;

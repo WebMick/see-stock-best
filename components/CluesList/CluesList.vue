@@ -22,10 +22,7 @@
 			</view>
 			<view class="actionBox">
 				<CluesActions 
-					:down="item.downCount"
-					:up="item.upCount"
-					:collection="item.isFavor"
-					:commendType="item.commendType"
+					:sData.sync="item"
 					/>
 			</view>
 			
@@ -40,6 +37,26 @@
 			list: {
 				type: Array,
 				default: () => []
+			}
+		},
+		methods: {
+			action(type){
+				let { sData } = this;
+				let { id } = sData;
+				let params = {
+					id,
+					type
+				};
+				this.$api.cluesAction(params).then(res => {
+					let { data } = res;
+					let newSData = {
+						...sData,
+						...data
+					}
+					console.log({newSData})
+					this.$emit('update:sData', newSData)
+				});
+				
 			}
 		}
 	}

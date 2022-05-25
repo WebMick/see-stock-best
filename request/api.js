@@ -179,6 +179,14 @@ const favorHistoryDetailDel = (data) => {
 	})
 }
 
+const cluesAction = (data) => {
+	return request({
+		url: '/clues/action', 
+		data,
+		encryption: true
+	})
+}
+
 
 
 const api = {
@@ -204,7 +212,8 @@ const api = {
 	equityBriefInfo,
 	equityNewsList,
 	companyBulletinList,
-	favorHistoryDetailDel
+	favorHistoryDetailDel,
+	cluesAction
 }
 
 export{

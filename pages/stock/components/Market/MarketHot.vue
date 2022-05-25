@@ -91,7 +91,7 @@
 				&.textFlat{
 					background: rgba(#8694AA, .05);
 				}
-				&.textFlat{
+				&.textDown{
 					background: rgba(#02BD85, .05);
 				}
 				.infoBox{

@@ -25,7 +25,7 @@ const PRODUCTION  = {
 	appVersion: '1.2.9'
 };
 let APIROOT = TEST;
-if(process.env.NODE_ENV !== 'production') APIROOT = PRODUCTION;
+if(process.env.NODE_ENV == 'production') APIROOT = PRODUCTION;
 
 const nonceStr  = '5K8264ILTKCH16CQ2502SI8ZNMTM67VS';
 
