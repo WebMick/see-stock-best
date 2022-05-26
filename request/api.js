@@ -196,6 +196,15 @@ const equityConstituentStockList = (data) => {
 	})
 }
 
+// 笔记 
+const equityNoteList = (data) => {
+	return request({
+		url: '/equity/note/list', 
+		data
+	})
+}
+
+
 
 const api = {
 	login,
@@ -220,7 +229,8 @@ const api = {
 	companyBulletinList,
 	favorHistoryDetailDel,
 	cluesAction,
-	equityConstituentStockList
+	equityConstituentStockList,
+	equityNoteList
 }
 
 export{

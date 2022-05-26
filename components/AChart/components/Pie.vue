@@ -52,8 +52,39 @@
 				canvas.height = height;
 				this.canvasWidth = width;
 				this.canvasHeight = height;
+				this.arcx = width / 2;
+				this.arcy = height / 2;
+				this.arcw = 10 * pixelRatio;
+				this.arcRadius = (width - this.arcw * 2) / 2;
+				this.draw(ctx);
+				// this.drawArc({
+				// 	ctx,
+				// 	color: '#FF8300',
+				// 	start: 1.5 * Math.PI,
+				// 	end: 2 * Math.PI
+				// });
 			},
-			
+			draw(ctx){
+				let { chartData } = this;
+				let start = 1.5 * Math.PI;
+				let colorList = ['#FF8300', '#1988F4', '#0A447D', '#909399']
+				chartData.map((item, index) => {
+					let { income_ratio } = item;
+					let color = colorList[index];
+					let end = 1.5 * Math.PI + parseFloat(income_ratio) / 100 * 2 * Math.PI;
+					this.drawArc({ctx, start, end, color})
+					start = end;
+				});
+				// console.log({chartData})
+			},
+			drawArc({ctx, start, end, color}){
+				ctx.beginPath();
+				ctx.strokeStyle = color;
+				ctx.lineWidth = this.arcw;
+				ctx.arc(this.arcx, this.arcy, this.arcRadius, start, end);
+				ctx.stroke();
+				ctx.closePath();
+			}
 		}
 	}
 </script>

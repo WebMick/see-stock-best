@@ -29,6 +29,11 @@
 							:list="companyBulletinListData"
 							/>
 					</template>
+					<template v-if="item.id == 4">
+						<Notes 
+							:list="equityNoteListData"
+							/>
+					</template>
 				</swiper-item>
 			</swiper>
 		</view>
@@ -40,12 +45,14 @@
 	import About from './About.vue';
 	import News from './News.vue';
 	import Notice from './Notice.vue';
+	import Notes from './Notes.vue';
 	export default {
 		name: '',
 		components: {
 			About,
 			News,
-			Notice
+			Notice,
+			Notes
 		},
 		props: {
 			isShowSubpage: {
@@ -93,7 +100,8 @@
 				swiperCurrent: 0,
 				aboutData: '',
 				newsListData: '',
-				companyBulletinListData: ''
+				companyBulletinListData: '',
+				equityNoteListData: []
 			}
 		},
 		methods:{
@@ -101,7 +109,6 @@
 				let { type } = this;
 				this.tabList[type].activeId = id;
 				this.swiperCurrent = this.tabList[type].list.findIndex((item) => item.id == id);
-				this.getDataById();
 			},
 			swiperChange(e){
 				let { type } = this;
@@ -126,14 +133,15 @@
 					this.companyBulletinList();
 				}
 				else if(activeId == 4){
-					
+					this.equityNoteList();
 				}
 			},
 			isShowSubpageFn(){
 				let { isShowSubpage, type, tabList } = this;
 				if(!isShowSubpage){
 					let { activeId }  = tabList[type];
-					this.change({id: activeId})
+					this.change({id: activeId});
+					this.getDataById();
 				}
 				this.$emit('isShowSubpageFn');
 			},
@@ -174,6 +182,14 @@
 						return item;
 					});
 					this.companyBulletinListData = data;
+				});
+			},
+			// 获取笔记数据
+			equityNoteList(){
+				let { code } = this;
+				this.$api.equityNoteList({code}).then(res => {
+					let { data } = res;
+					this.equityNoteListData = data.list;
 				});
 			}
 		}

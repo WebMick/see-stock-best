@@ -67,7 +67,11 @@
 								</view>
 							</view>
 							<view class="chart">
-								
+								<AChart 
+									type="pie"
+									:height="[160]"
+									:chartData="item"
+									/>
 							</view>
 						</view>
 					</view>

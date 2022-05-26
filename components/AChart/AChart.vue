@@ -23,7 +23,11 @@
 			:canvasId="canvasId"
 			/>
 		<!-- 饼图 -->
-		
+		<Pie 
+			v-if="type == 'pie'"
+			:chartData="chartData"
+			:height="height" 
+			/>	
 	</view>
 </template>
 
@@ -35,6 +39,7 @@
 	// 五日 组件 单独组件、接口
 	import Kline from './components/Kline.vue';
 	import Minute from './components/Minute.vue';
+	import Pie from './components/Pie.vue';
 	export default {
 		/**
 		 * type: 
@@ -42,7 +47,8 @@
 		name:"AChart",
 		components: {
 			Kline,
-			Minute
+			Minute,
+			Pie
 		},
 		props: {
 			// 股票cod
