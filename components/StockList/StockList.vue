@@ -2,7 +2,7 @@
 	<view class="list">
 		<template v-if="list && list.length >0">
 			<template v-for="(item, index) in list">
-				<view class="item" :class="{showOptions: showOptions}" @click="clickItem(item)">
+				<view class="item" :class="{showOptions: showOptions}" @click="clickItem(item)" :key="index">
 					<view class="checkBox" v-if="showCheck" @click.stop="check(item, index)">
 						<image v-if="!item.isCheck && checkLength < 3" :src="$imgUrl('/images/equities/product/202203301057439318.png')" class="icon" mode=""></image>
 						<image v-if="item.isCheck" :src="$imgUrl('/images/equities/product/202203301058109310.png')" class="icon" mode=""></image>
