@@ -12,7 +12,7 @@
 			</view>
 		</view>
 		<view class="swiperBox">
-			<swiper class="swiper" :indicator-dots="false" :current="tabList[type].activeId" :autoplay="false"  @change="swiperChange">
+			<swiper class="swiper" :indicator-dots="false" :current="swiperCurrent" :autoplay="false"  @change="swiperChange">
 				<swiper-item v-for="(item, index) in tabList[type].list" class="swiperItem" :key="index">
 					<template v-if="item.id == 0">
 						<About 
@@ -90,6 +90,7 @@
 						activeId: 0
 					}
 				},
+				swiperCurrent: 0,
 				aboutData: '',
 				newsListData: '',
 				companyBulletinListData: ''
@@ -99,31 +100,40 @@
 			change({id}){
 				let { type } = this;
 				this.tabList[type].activeId = id;
+				this.swiperCurrent = this.tabList[type].list.findIndex((item) => item.id == id);
+				this.getDataById();
 			},
 			swiperChange(e){
 				let { type } = this;
 				let { detail: { current } } = e;
-				this.tabList[type].activeId = current;
-				if(current == 0){
+				let { id } = this.tabList[type].list[current]
+				this.tabList[type].activeId = id;
+				this.getDataById()
+			},
+			getDataById(id){
+				let { type } = this;
+				let { activeId } = this.tabList[type];
+				if(activeId == 0){
+					this.equityBriefInfo();
+				}
+				else if(activeId == 1){
 					
 				}
-				else if(current == 1){
-					
-				}
-				else if(current == 2){
+				else if(activeId == 2){
 					this.equityNewsList();
 				}
-				else if(current == 3){
+				else if(activeId == 3){
 					this.companyBulletinList();
 				}
-				else if(current == 4){
+				else if(activeId == 4){
 					
 				}
 			},
 			isShowSubpageFn(){
-				let { isShowSubpage } = this;
+				let { isShowSubpage, type, tabList } = this;
 				if(!isShowSubpage){
-					this.equityBriefInfo();
+					let { activeId }  = tabList[type];
+					this.change({id: activeId})
 				}
 				this.$emit('isShowSubpageFn');
 			},

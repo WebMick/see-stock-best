@@ -15,7 +15,9 @@
 				:code="code"
 				/>
 			<template v-if="equitySecurityInfoData.common_info.type == 1">
-				
+				<ComponentStock
+					:code="code"
+					/>
 			</template>
 			<template v-if="equitySecurityInfoData.common_info.type == 2">
 				<MustSee
@@ -41,11 +43,13 @@
 	import KlineBox from './components/KlineBox.vue';
 	import MustSee from './components/MustSee.vue';
 	import Subpage from './components/Subpage/index.vue';
+	import ComponentStock from './components/ComponentStock.vue';
 	export default {
 		components: {
 			NumBox,
 			KlineBox,
 			MustSee,
+			ComponentStock,
 			Subpage
 		},
 		computed: {

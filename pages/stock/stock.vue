@@ -74,23 +74,6 @@
 		<Tabbar 
 			:selected="1"
 			/>
-		<!-- 红包 -->
-		<u-popup 
-			:show="isShowRedEven"
-			overlayOpacity="0.8"
-			bgColor="transparent"
-			mode="center">
-			<RedEven 
-				@close="redEvenClose"
-				/>
-		</u-popup>
-		<!-- 没领取的浮窗小红包 -->
-		<view class="smallRedEven" 
-			v-if="isShowSmallRedEven"
-			@click="showRedEven"
-			>
-			<image class="icon" :src="$imgUrl('/images/equities/product/packet_121.png')" mode=""></image>
-		</view>
 	</view>
 </template>
 
@@ -122,7 +105,6 @@
 		},
 		data() {
 			return {
-				isShowRedEven: false,
 				isShowSmallRedEven: false,
 				firstTabsList: [
 					{ name: '自选股', id: [1, 2, 3]},
@@ -319,16 +301,6 @@
 						...this.marketStatusData,
 						...data
 					};
-					// 红包 每天提醒一次
-					let hasShowRedEven = this.$uniApi.storage().get('hasShowRedEven');
-					let { show_red_package } = data;
-					if(!hasShowRedEven){
-						let { guess_right_count, week_guess_right_count } = data;
-						this.isShowRedEven = (guess_right_count >= 3 || week_guess_right_count > 0) && !show_red_package;
-						this.$uniApi.storage().set('hasShowRedEven', true);
-					};
-					this.isShowSmallRedEven = show_red_package;
-					this.$forceUpdate();
 				})
 			},
 			// 根据竞猜池 获取 已 竞猜的数据 并 置顶
@@ -525,22 +497,6 @@
 					else if(tabsCurrent == 3){
 						this.weekGuessListData = list;
 					}
-				}
-			},
-			showRedEven(){
-				this.isShowRedEven = true;
-			},
-			// 红包关闭
-			redEvenClose(isOpen){
-				// 是否打开了的红包 再关闭的
-				if(isOpen){
-					this.isShowRedEven = false;
-					this.homeData();
-				}else{
-					this.$api.redDebrisClose().then(res => {
-						this.isShowRedEven = false;
-						this.homeData();
-					})
 				}
 			}
 		}

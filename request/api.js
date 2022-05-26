@@ -1,4 +1,5 @@
-import { request } from "./reuqest.js"
+import { request } from "./reuqest.js";
+// 登录
 const login = async (data) => {
 	let result = await uni.login();
 	if(result && result.length){
@@ -15,12 +16,14 @@ const login = async (data) => {
 	return false;
 }
 
+// 配置
 const config = () => {
 	return request({
 		url: '/config'
 	});
 }
 
+// 自选列表
 const stockList = (data) => {
 	return request({
 		url: '/favor/list',
@@ -29,7 +32,7 @@ const stockList = (data) => {
 	})
 };
 
-
+// 浏览记录
 const historyList = (data) => {
 	return request({
 		url: '/favor/history/detail/list',
@@ -38,6 +41,7 @@ const historyList = (data) => {
 	})
 };
 
+// 竞猜
 const guessHandle = (data) => {
 	return request({
 		url: '/guess/handle',
@@ -45,6 +49,7 @@ const guessHandle = (data) => {
 	})
 };
 
+// 首页数据
 const homeData = (data) => {
 	return request({
 		url: '/home',
@@ -52,6 +57,7 @@ const homeData = (data) => {
 	})
 };
 
+// 竞猜池
 const guessNewPool = (data) => {
 	return request({
 		url: '/guess/new/pool',
@@ -59,6 +65,7 @@ const guessNewPool = (data) => {
 	})
 };
 
+// 周竞猜列表
 const weekGuessList = (data) => {
 	return request({
 		url: '/favor/new/list',
@@ -67,6 +74,7 @@ const weekGuessList = (data) => {
 	})
 }
 
+// 周竞猜记录
 const weekGuessCurren = () => {
 	return request({
 		url: '/week/guess/current/record',
@@ -74,7 +82,7 @@ const weekGuessCurren = () => {
 	})
 };
 
-
+// 周竞猜
 const weekGuessHandle = (data) => {
 	return request({
 		url: '/week/guess/handle',
@@ -82,6 +90,7 @@ const weekGuessHandle = (data) => {
 	})
 }
 
+// 市场
 const equityMarket = () => {
 	return request({
 		url: '/equity/market',
@@ -89,6 +98,7 @@ const equityMarket = () => {
 	})
 }
 
+// 文章列表
 const articlesList = (data) => {
 	return request({
 		url: '/articles/list',
@@ -97,6 +107,7 @@ const articlesList = (data) => {
 	})
 }
 
+// 线索列表
 const cluesList = (data) => {
 	return request({
 		url: '/clues/list',
@@ -104,19 +115,7 @@ const cluesList = (data) => {
 		encryption: true
 	})
 }
-
-const openRedEven = () => {
-	return request({
-		url: '/user/open/guess/red/package'
-	})
-}
-
-const redDebrisClose = () => {
-	return request({
-		url: '/red/debris/close'
-	})
-}
-
+// 详情
 const equitySecurityInfo = (data) => {
 	return request({
 		url: '/equity/security/info',
@@ -142,6 +141,7 @@ const equityTickerKline = (data) => {
 	})
 }
 
+// 
 const equityBigInfo = (data) => {
 	return request({
 		url: '/equity/big/info', 
@@ -187,6 +187,14 @@ const cluesAction = (data) => {
 	})
 }
 
+// 成分股
+const equityConstituentStockList = (data) => {
+	return request({
+		url: '/equity/constituent/stock/list', 
+		data,
+		method: 'GET'
+	})
+}
 
 
 const api = {
@@ -203,8 +211,6 @@ const api = {
 	equityMarket,
 	articlesList,
 	cluesList,
-	openRedEven,
-	redDebrisClose,
 	equitySecurityInfo,
 	equityFiveKlineSix,
 	equityTickerKline,
@@ -213,7 +219,8 @@ const api = {
 	equityNewsList,
 	companyBulletinList,
 	favorHistoryDetailDel,
-	cluesAction
+	cluesAction,
+	equityConstituentStockList
 }
 
 export{
