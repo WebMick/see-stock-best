@@ -8,7 +8,7 @@
 				</view>
 			</Navbar>
 			<NumBox 
-				:sData="equitySecurityInfoData"
+				:sData.sync="equitySecurityInfoData"
 				/>
 			<KlineBox
 				:sData="equitySecurityInfoData"

@@ -7,8 +7,10 @@
 			:autoplay="false">
 			<swiper-item v-for="(item, index) in newList" class="swiperItem" :key="index">
 				<view class="cItem" 
+					v-for="(cItem, cIndex) in item" 
 					:class="[$setClass(cItem.ratio)]"
-					v-for="(cItem, cIndex) in item" :key="cIndex">
+					@click="toDetail(cItem)"
+					:key="cIndex">
 					<view class="name">
 						{{cItem.name}}
 					</view>
@@ -70,6 +72,15 @@
 			swiperChange(e){
 				let { detail: { current } } = e;
 				this.current = current;
+			},
+			toDetail(item){
+				let { code } = item;
+				this.$uniApi.navTo({
+					url: '/stock/stockDetail/stockDetail',
+					params: {
+						code
+					}
+				});
 			}
 		}
 	}

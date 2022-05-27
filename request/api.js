@@ -203,8 +203,20 @@ const equityNoteList = (data) => {
 		data
 	})
 }
-
-
+// 加自选
+const favorAdd = (data) => {
+	return request({
+		url: '/favor/add', 
+		data
+	})
+}
+// 删除自选
+const favorDelete = (data) => {
+	return request({
+		url: '/favor/delete', 
+		data
+	})
+}
 
 const api = {
 	login,
@@ -230,7 +242,9 @@ const api = {
 	favorHistoryDetailDel,
 	cluesAction,
 	equityConstituentStockList,
-	equityNoteList
+	equityNoteList,
+	favorAdd,
+	favorDelete
 }
 
 export{

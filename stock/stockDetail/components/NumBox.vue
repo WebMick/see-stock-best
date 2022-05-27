@@ -216,7 +216,36 @@
 			},
 			// 加/删自选
 			addOrDel(){
-				this.$emit('addOrDel');
+				let { common_info: { code, user_have_favor } } = this.sData;
+				if(user_have_favor){
+					uni.showModal({
+						content: '确定要删除该自选股吗?',
+						success: (res) => {
+							let { confirm } = res;
+							if(confirm){
+								this.$api.favorDelete({ids: [code]}).then(res => {
+									let { sData } = this;
+									sData.common_info.user_have_favor = false;
+									uni.showToast({
+										title: '已成功删除该自选股！',
+										icon: 'none'
+									});
+									this.$emit('update:sData', sData);
+								});
+							}
+						}
+					});
+				}else{
+					this.$api.favorAdd({equities_code: code}).then(res => {
+						let { sData } = this;
+						sData.common_info.user_have_favor = true;
+						uni.showToast({
+							title: '已成功添加该自选股！',
+							icon: 'none'
+						})
+						this.$emit('update:sData', sData);
+					});
+				};
 			}
 		}
 	}
