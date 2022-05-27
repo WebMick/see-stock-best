@@ -57,12 +57,6 @@
 				this.arcw = 10 * pixelRatio;
 				this.arcRadius = (width - this.arcw * 2) / 2;
 				this.draw(ctx);
-				// this.drawArc({
-				// 	ctx,
-				// 	color: '#FF8300',
-				// 	start: 1.5 * Math.PI,
-				// 	end: 2 * Math.PI
-				// });
 			},
 			draw(ctx){
 				let { chartData } = this;
@@ -71,7 +65,7 @@
 				chartData.map((item, index) => {
 					let { income_ratio } = item;
 					let color = colorList[index];
-					let end = 1.5 * Math.PI + parseFloat(income_ratio) / 100 * 2 * Math.PI;
+					let end = start + income_ratio / 100 * 2 * Math.PI;
 					this.drawArc({ctx, start, end, color})
 					start = end;
 				});
