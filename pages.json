@@ -50,6 +50,16 @@
             }
             
         }
+        ,{
+            "path" : "stock/search/search",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "趣看行情",
+				"navigationBarBackgroundColor": "#fff",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

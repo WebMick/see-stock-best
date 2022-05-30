@@ -28,6 +28,14 @@
 						:current="tabsCurrent"
 						@change="tabsChange"
 						/>
+					<view class="btnBox">
+						<view class="btnItem" @click="toPage('/stock/search/search')">
+							<image :src="$imgUrl('/images/equities/product/202203281041517200.png')" class="icon" mode=""></image>
+						</view>
+						<view class="btnItem">
+							<image :src="$imgUrl('/images/equities/product/202203281041412593.png')" class="icon" mode=""></image>
+						</view>
+					</view>
 				</view>
 			</view>
 			<view class="main">
@@ -118,8 +126,8 @@
 					{ name: '市场', id: 4, hide: true },
 					{ name: '线索', id: 5, hide: true }
 				],
-				swiperCurrent: 4,
-				tabsCurrent: 5,
+				swiperCurrent: 1,
+				tabsCurrent: 2,
 				stockListParams: {
 					page: 1,
 					page_size: 15,
@@ -498,6 +506,12 @@
 						this.weekGuessListData = list;
 					}
 				}
+			},
+			// 页面跳转
+			toPage(url){
+				this.$uniApi.navTo({
+					url
+				});
 			}
 		}
 	}

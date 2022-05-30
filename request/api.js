@@ -217,6 +217,16 @@ const favorDelete = (data) => {
 		data
 	})
 }
+// 搜索列表
+const favorSearch = (data) => {
+	return request({
+		url: '/favor/search', 
+		data,
+		method: 'GET'
+	})
+}
+
+
 
 const api = {
 	login,
@@ -244,7 +254,8 @@ const api = {
 	equityConstituentStockList,
 	equityNoteList,
 	favorAdd,
-	favorDelete
+	favorDelete,
+	favorSearch
 }
 
 export{

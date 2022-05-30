@@ -58,7 +58,8 @@
 		position: absolute;
 	}
 	.page{
-		
+		overflow: hidden;
+		padding-bottom: env(safe-area-inset-bottom); 
 	}
 	.tabPage{
 		padding-bottom: calc(98rpx + env(safe-area-inset-bottom)); 

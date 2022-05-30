@@ -20,6 +20,25 @@
 		background: #fff;
 		border-bottom: #f4f5f6 solid 1px;
 		padding: 0 32rpx;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		.btnBox{
+			display: flex;
+			align-items: center;
+			.btnItem{
+				height: 70rpx;
+				width: 70rpx;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				.icon{
+					display: block;
+					width: 45rpx;
+					height: 45rpx;
+				}
+			}
+		}
 	}
 	.main{
 		flex: 1;
