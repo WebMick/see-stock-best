@@ -2,13 +2,13 @@
 	<view class="marketBox">
 		<view class="left">
 			<view class="numBox" 
-				v-if="marketStatusData.market && marketStatusData.market.range_ratio"
-				:class="[$setClass(marketStatusData.market.range_ratio)]">
+				v-if="marketStatusData.market && marketStatusData.market.ratio"
+				:class="[$setClass(marketStatusData.market.ratio)]">
 				<view class="fontRegular price">
 					{{marketStatusData.market.newPrice}}
 				</view>
 				<view class="fontRegular ratio">
-					{{$setAddSymbol(marketStatusData.market.range_ratio)}}%
+					{{$setAddSymbol(marketStatusData.market.ratio)}}%
 				</view>
 			</view>
 			<view class="info">

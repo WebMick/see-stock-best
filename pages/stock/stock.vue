@@ -167,7 +167,7 @@
 			async init(){ 
 				this.wsCodeList = [];// 需要监听的code列表
 				await this.homeData();
-				await this.guessNewPool();
+				await this.equityMarket();
 				await this.getDataById();
 				await this.weekGuessCurren();
 			},
@@ -311,27 +311,6 @@
 					};
 				})
 			},
-			// 根据竞猜池 获取 已 竞猜的数据 并 置顶
-			guessNewPool(){
-				this.$api.guessNewPool({reset: 0}).then(res => {
-					let { data: { pool } } = res;
-					if(pool && pool.length > 0){
-						let list = [];
-						pool.map(item => {
-							let { user_guess, code } = item;
-							if(user_guess && user_guess != 0){
-								list.push(item);
-							}
-							if(code == 'sh000001'){
-								this.marketStatusData.market = item;
-								this.$forceUpdate()
-							}
-						});
-						console.log({list})
-						this.guessListData = list;
-					}
-				})
-			},
 			// 获取周竞猜列表数据
 			weekGuessList(){
 				let { weekGuessListParams, weekGuessCodes } = this;
@@ -425,6 +404,7 @@
 				this.$api.equityMarket().then(res => {
 					let { data } = res;
 					this.marketData = data;
+					this.marketStatusData.market = data.stock[0];
 				});
 				this.articlesList();
 			},
