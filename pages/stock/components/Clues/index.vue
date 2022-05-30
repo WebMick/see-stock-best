@@ -4,7 +4,6 @@
 			<CluesCount 
 				/>
 			<CluesNav 
-				@clickNav="clickNav"
 				/> 
 			<CluesList 
 				:list="cluesListData.list"

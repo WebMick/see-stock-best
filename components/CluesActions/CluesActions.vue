@@ -14,10 +14,13 @@
 			</view>
 			<view class="text">支持 <text class="num">{{sData.upCount}}</text></view>
 		</view>
-		<!-- <view class="btnItem" v-if="collection">
-			<view class="iconBox"></view>
-			<view class="text">收藏 <text class="num">{{collection}}</text></view>
-		</view> -->
+		<view class="btnItem" :class="{act: sData.follow == 1}" @click="action(3)">
+			<view class="iconBox">
+				<image :src="$imgUrl('/images/equities/product/202205301701179129.png')" v-if="sData.follow == 1" class="icon" mode=""></image>
+				<image :src="$imgUrl('/images/equities/product/202205301701105614.png')" v-if="sData.follow == 2" class="icon" mode=""></image>
+			</view>
+			<view class="text">收藏</view>
+		</view>
 	</view>
 </template>
 
@@ -36,14 +39,43 @@
 			action(type){
 				let { sData } = this;
 				let { id } = sData;
-				let params = {
-					id,
-					type
-				};
-				this.$api.cluesAction(params).then(res => {
-					this.$emit('action')
-				});
-				
+				if(type != 3){
+					let params = {
+						id,
+						type
+					};
+					this.$api.cluesAction(params).then(res => {
+						this.$emit('action')
+					});
+				}
+				else {
+					let { userId, guess_day, follow } = sData;
+					let params = {
+						clues_id: id,
+						clues_uid: userId,
+						guess_day
+					};
+					if(follow == 1){
+						uni.showModal({
+							content: '要删除自选组合吗?',
+							showCancel: true,
+							cancelText: '取消',
+							confirmText: '删除',
+							success: (result) => {
+								if(result.confirm){
+									this.$api.cluesFollowDel(params).then(res => {
+										this.$emit('action');
+									});
+								}
+							}
+						});
+					}else{
+						this.$api.cluesFollow(params).then(res => {
+							this.$emit('action');
+						});
+					}
+					
+				}
 			}
 		}
 	}

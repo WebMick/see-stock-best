@@ -8,21 +8,21 @@ const TEST = {
 	api: 'http://testequities.sunwaystech.com',
 	dot: 'http://testdot.sunwaystech.com',
 	wss: 'ws://testews.sunwaystech.com',
-	appVersion: '1.2.9'
+	appVersion: '1.3.1'
 };
 // 预发布
 const RELEASE = {
 	api: 'http://equities200.sunwaystech.com',
 	dot: 'http://dot.sunwaystech.com',
 	wss: 'wss://ews.sunwaystech.com',
-	appVersion: '1.2.9'
+	appVersion: '1.3.1'
 };
 // 正式
 const PRODUCTION  = {
 	api: 'https://equities.sunwaystech.com',
 	dot: 'https://dot.sunwaystech.com',
 	wss: 'wss://ews.sunwaystech.com',
-	appVersion: '1.2.9'
+	appVersion: '1.3.1'
 };
 let APIROOT = TEST;
 if(process.env.NODE_ENV == 'production') APIROOT = PRODUCTION;
@@ -36,21 +36,48 @@ const nonceStr  = '5K8264ILTKCH16CQ2502SI8ZNMTM67VS';
  * key： 秘钥
  * 备注：signObj属性按照字典升序排列
  */
-const setSign = (data = {}, timestamp) => {
+const setSign = (data, timestamp) => {
 	let obj = {
-		param: JSON.stringify(data),
-		timestamp,
-		key: nonceStr
+		AppVersion: APIROOT.appVersion,
+		timestamp
 	};
+	if(data && JSON.stringify(data) != '{}' ){
+		obj.param = JSON.stringify(data);
+	}
+	let { v_userInfo }  = store.getters,
+		token;
+	(JSON.stringify(v_userInfo) != '{}') && (token = v_userInfo.token);
+	if(token){
+		obj.token = token;
+	}
+	console.log({obj})
+	obj = sortAscii(obj);
+	console.log({obj})
 	// 生成加密字符串
 	let arr = [];
 	for(const key in obj){
 		arr.push(`${key}=${obj[key]}`);
 	};
+	arr.push(`key=${nonceStr}`)
 	let str = Md5(arr.join('&'));
 	return str;
 }
 
+// 按照字典升序排列
+const sortAscii = (obj) => {
+	let arr = new Array();
+    let num = 0;
+    for (let i in obj) {
+      arr[num] = i;
+      num++;
+    }
+    let sortArr = arr.sort();
+    let sortObj = {};
+    for (let i in sortArr) {
+      sortObj[sortArr[i]] = obj[sortArr[i]];
+    }
+    return sortObj;
+}
 
 /**
  * 设置请求头
@@ -65,7 +92,8 @@ const setHeader = (data = {}) => {
 	let header = {
 		appVersion,
 		timestamp,
-		signature
+		signature,
+		
 	};
 	let { v_userInfo }  = store.getters,
 		token;

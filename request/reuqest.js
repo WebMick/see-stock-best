@@ -1,15 +1,18 @@
 import { APIROOT, setHeader, randomString, RSAEncrypt, AesEncrypt, Decrypt } from './config'
 import store from '../store/store';
 
-const request = ({url, data = {}, method = 'POST', type = 'api', requestType = 'request', encryption = false}) => {
+const request = ({url, data, method = 'POST', type = 'api', requestType = 'request', encryption = false}) => {
 	// 路径处理
 	url = APIROOT[type] + url;
-
+	let filePath;
 	// 上传的文件 不算入加密中
-	let { filePath } = data;
-	if(filePath){
-		delete data.filePath;
+	if(data && JSON.stringify(data) != '{}'){
+		filePath = data.filePath;
+		if(filePath){
+			delete data.filePath;
+		}
 	}
+	
 	// 请求头信息，加密、token、签名等内容处理
 	let header = setHeader(data);
 	let key;
@@ -26,9 +29,11 @@ const request = ({url, data = {}, method = 'POST', type = 'api', requestType = '
 			}
 		}
 	}else{
-		data = {
-			param: JSON.stringify(data)
-		};
+		if(data && JSON.stringify(data) != '{}'){
+			data = {
+				param: JSON.stringify(data)
+			};
+		}
 	}
 	// requestType 请求类型不同时，参数有所不同，先处理公共参数，再设置各自参数
 	let cParams = {
@@ -60,6 +65,7 @@ const request = ({url, data = {}, method = 'POST', type = 'api', requestType = '
 				if(statusCode == 200){
 					if(encryption){
 						data = JSON.parse(Decrypt(data, key ));
+						console.log({data});
 					}
 					let { code } = data;
 					if(code != 0){

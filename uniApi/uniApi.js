@@ -122,6 +122,10 @@ const navTo = ({that, url, params = {}, type = 'navigateTo'}) => {
 				console.log({res})
 			},
 			fail: (err)=>{
+				uni.showToast({
+					title: err.errMsg,
+					icon: 'none'
+				})
 				console.log({err})
 			},
 			complete: (com)=>{

@@ -1,20 +1,20 @@
 <template>
 	<view class="cluesNav">
-		<view class="item" @click="clickNav(1)">
+		<view class="item" @click="toPage('/clues/myClues/myClues')">
 			<view class="title">
 				<image class="icon" :src="$imgUrl('/images/equities/product/202205121801333997.png')" mode=""></image>
 				<text class="text">自选组合</text>
 			</view>
 			<view class="sub">我关注的自选</view>
 		</view>
-		<view class="item" @click="clickNav(2)">
+		<view class="item" @click="toPage(2)">
 			<view class="title">
 				<image class="icon" :src="$imgUrl('/images/equities/product/202205121802532201.png')" mode=""></image>
 				<text class="text">搜索查找组合</text>
 			</view>
 			<view class="sub">发现优质组合</view>
 		</view>
-		<view class="item" @click="clickNav(3)">
+		<view class="item" @click="toPage()">
 			<view class="title">
 				<image class="icon" :src="$imgUrl('/images/equities/product/202205121803046210.png')" mode=""></image>
 				<text class="text">组合排行榜</text>
@@ -33,8 +33,10 @@
 			}
 		},
 		methods:{
-			clickNav(type){
-				this.$emit('clickNav', type);
+			toPage(url){
+				this.$uniApi.navTo({
+					url
+				})
 			}
 		}
 	}

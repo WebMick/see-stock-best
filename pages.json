@@ -60,6 +60,16 @@
             }
             
         }
+        ,{
+            "path" : "clues/myClues/myClues",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "我的自选组合",
+				"navigationBarBackgroundColor": "#fff",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

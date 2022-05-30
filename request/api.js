@@ -226,7 +226,30 @@ const favorSearch = (data) => {
 	})
 }
 
-
+// 添加组合
+const cluesFollow = (data) => {
+	return request({
+		url: '/clues/follow', 
+		data,
+		encryption: true
+	})
+}
+// 删除组合
+const cluesFollowDel = (data) => {
+	return request({
+		url: '/clues/follow/del', 
+		data,
+		encryption: true
+	})
+}
+// 我的组合
+const cluesFollowClues = () => {
+	return request({
+		url: '/clues/follow/clues', 
+		encryption: true,
+		method: 'GET'
+	})
+}
 
 const api = {
 	login,
@@ -255,7 +278,10 @@ const api = {
 	equityNoteList,
 	favorAdd,
 	favorDelete,
-	favorSearch
+	favorSearch,
+	cluesFollow,
+	cluesFollowDel,
+	cluesFollowClues
 }
 
 export{

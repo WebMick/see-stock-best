@@ -17,7 +17,11 @@
 		},
 		methods: {
 			login(){
-				this.$api.login().then(res => {
+				let params = {
+					pfid: '',
+					shareUid: ''
+				}
+				this.$api.login(params).then(res => {
 					let { data } = res;
 					this.$api.config().then(res => {
 						let config = res.data;
