@@ -471,7 +471,7 @@
 							item.fluctuate_val = range_ratio;
 							if(code == 'sh000001'){
 								this.marketStatusData.market.newPrice = price;
-								this.marketStatusData.market.range_ratio = range_ratio;
+								this.marketStatusData.market.ratio = range_ratio;
 							}
 						}
 						return item;
