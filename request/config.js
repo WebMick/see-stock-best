@@ -41,9 +41,11 @@ const setSign = (data, timestamp) => {
 		AppVersion: APIROOT.appVersion,
 		timestamp
 	};
+	// 是否有参数
 	if(data && JSON.stringify(data) != '{}' ){
 		obj.param = JSON.stringify(data);
 	}
+	// token 加密
 	let { v_userInfo }  = store.getters,
 		token;
 	(JSON.stringify(v_userInfo) != '{}') && (token = v_userInfo.token);
