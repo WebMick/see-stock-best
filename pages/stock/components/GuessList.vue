@@ -22,7 +22,7 @@
 					猜:{{weekGuessCurrenData.guess_range.value}}
 				</view>
 				<view class="value" :class="[$setClass(weekGuessCurrenData.current_range.value)]">
-					当前:{{weekGuessCurrenData.current_range.value}}
+					当前:{{weekGuessCurrenData.current_range.value}}%
 				</view>
 			</view>
 		</view>
@@ -66,7 +66,7 @@
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
-				margin: 10rpx 15rpx 0 0;
+				margin: 10rpx 5rpx 0 0;
 				font-size: 24rpx;
 				.split{
 					color: #BCBEC2;

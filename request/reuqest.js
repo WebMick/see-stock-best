@@ -60,24 +60,22 @@ const request = ({url, data = {}, method = 'POST', type = 'api', requestType = '
 				if(statusCode == 200){
 					if(encryption){
 						data = JSON.parse(Decrypt(data, key ));
-						console.log({data})
 					}
 					let { code } = data;
-					if(code == 0){
-						resolve(data);
-					}
-					else {
+					if(code != 0){
 						let { msg } = data;
 						uni.showToast({
 							title: msg,
 							icon: 'none'
-						})
+						});
 					}
+					resolve(data);
 				}
 				else if(statusCode == 401){
 					
 				}
 				else{
+					
 				};
 			},
 			fail: (err) => {

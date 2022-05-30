@@ -33,7 +33,7 @@
 						title: '已成功添加该自选股！',
 						icon: 'none'
 					})
-					this.$emit('update:list', sData);
+					this.$emit('update:list', list);
 				});
 			}
 		}

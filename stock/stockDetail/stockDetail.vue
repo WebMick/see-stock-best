@@ -14,6 +14,12 @@
 				:sData="equitySecurityInfoData"
 				:code="code"
 				/>
+			<template v-if="equityBigInfoData.point.content">
+				<NoticeBar 
+				:text="equityBigInfoData.point.content"
+				/>
+			</template>
+				
 			<template v-if="equitySecurityInfoData.common_info.type == 1">
 				<ComponentStock
 					:code="code"
@@ -44,13 +50,15 @@
 	import MustSee from './components/MustSee.vue';
 	import Subpage from './components/Subpage/index.vue';
 	import ComponentStock from './components/ComponentStock.vue';
+	import NoticeBar from './components/NoticeBar.vue';
 	export default {
 		components: {
 			NumBox,
 			KlineBox,
 			MustSee,
 			ComponentStock,
-			Subpage
+			Subpage,
+			NoticeBar
 		},
 		computed: {
 			...mapGetters(['v_navBarHeight', 'v_systemInfo']),
