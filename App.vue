@@ -44,6 +44,8 @@
 		min-height: 100vh;
 		background: #f4f5f6;
 		line-height: 1;
+		overflow: hidden;
+		padding-bottom: env(safe-area-inset-bottom); 
 	}
 	.textUp{
 		color: #FE5269;
@@ -56,10 +58,6 @@
 	}
 	.u-popup{
 		position: absolute;
-	}
-	.page{
-		overflow: hidden;
-		padding-bottom: env(safe-area-inset-bottom); 
 	}
 	.tabPage{
 		padding-bottom: calc(98rpx + env(safe-area-inset-bottom)); 

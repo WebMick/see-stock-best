@@ -250,6 +250,14 @@ const cluesFollowClues = () => {
 		method: 'GET'
 	})
 }
+// 删除组合
+const rank = () => {
+	return request({
+		url: '/rank'
+	})
+}
+
+
 
 const api = {
 	login,
@@ -281,7 +289,8 @@ const api = {
 	favorSearch,
 	cluesFollow,
 	cluesFollowDel,
-	cluesFollowClues
+	cluesFollowClues,
+	rank
 }
 
 export{

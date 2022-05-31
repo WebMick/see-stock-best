@@ -70,6 +70,17 @@
             }
             
         }
+        ,{
+            "path" : "activity/guessRank/guessRank",
+            "style" :                                                                                    
+            {
+               "navigationStyle": "custom",
+               "app-plus":{
+               	"titleView":false
+               }
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

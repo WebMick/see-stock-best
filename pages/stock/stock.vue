@@ -32,7 +32,7 @@
 						<view class="btnItem" @click="toPage('/stock/search/search')">
 							<image :src="$imgUrl('/images/equities/product/202203281041517200.png')" class="icon" mode=""></image>
 						</view>
-						<view class="btnItem">
+						<view class="btnItem" @click="toPage('/activity/guessRank/guessRank')">
 							<image :src="$imgUrl('/images/equities/product/202205311003309319.png')" class="icon" mode=""></image>
 						</view>
 					</view>

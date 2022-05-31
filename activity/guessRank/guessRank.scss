@@ -1,0 +1,35 @@
+.guessRank{
+    .header{
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 350rpx;
+        background-image: linear-gradient(99deg, #FFE05A 0%, #FFF39A 100%), linear-gradient(180deg, rgba(255, 243, 154, 0) 0%, #FFF39A 100%);
+        .title{
+            position: absolute;
+            left: 205rpx;
+            bottom: 70rpx;
+            width: 272rpx;
+            height: 146rpx;
+        }
+        .bg{
+            position: absolute;
+            z-index: 3;
+            bottom: 0;
+            left: 0;
+            height: 80rpx;
+            width: 100%;
+        }
+    }
+    .rankList{
+        position: fixed;
+        z-index: 6;
+		top: 280rpx;
+		left: 20rpx;
+        right: 20rpx;
+        bottom: 0;
+        background: #fff;
+        border-radius: 16rpx;
+    }
+}

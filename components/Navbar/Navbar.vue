@@ -9,7 +9,7 @@
 		</view>
 		<view class="main">
 			<slot>
-				<vire class="title">{{title}}</vire>
+				<vire class="title" :style="{opacity: opacity}">{{title}}</vire>
 			</slot>
 		</view>
 		<view class="bg" :style="bgColorStyle"></view>
@@ -23,7 +23,7 @@
 		props: {
 			title: {
 				type: String,
-				default: '趣看行情'
+				default: ''
 			},
 			hasBack: {
 				type: Boolean,
@@ -32,6 +32,10 @@
 			bgColor: {
 				type: String,
 				default: '#fff'
+			},
+			scrollTop: {
+				type: Number,
+				default: 100
 			}
 		},
 		computed: {
@@ -47,9 +51,14 @@
 				let size = v_navBarHeight - v_statusBarHeight;
 				return size;
 			},
+			opacity(){
+				let { scrollTop, v_navBarHeight } = this;
+				let opacity = scrollTop / v_navBarHeight;
+				return opacity;
+			},
 			bgColorStyle(){
-				let { bgColor } = this;
-				let style = `background: ${bgColor}`;
+				let { bgColor, opacity } = this;
+				let style = `background: ${bgColor};opacity: ${opacity}`;
 				return style;
 			}
 		},
