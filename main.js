@@ -5,7 +5,10 @@ import { api } from './request/api';
 import { uniApi } from 'uniApi/uniApi.js';
 import uView from 'uview-ui';
 import { setClass, imgUrl, setAddSymbol } from 'utils/utils.js';
+import share from 'utils/share.js'
 Vue.use(uView)
+
+Vue.mixin(share)
 
 Vue.prototype.$api = api;
 Vue.prototype.$uniApi = uniApi;

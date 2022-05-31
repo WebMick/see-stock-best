@@ -52,9 +52,7 @@ const setSign = (data, timestamp) => {
 	if(token){
 		obj.token = token;
 	}
-	console.log({obj})
 	obj = sortAscii(obj);
-	console.log({obj})
 	// 生成加密字符串
 	let arr = [];
 	for(const key in obj){
