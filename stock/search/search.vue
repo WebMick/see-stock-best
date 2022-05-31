@@ -40,7 +40,7 @@
 				let { searchParams } = this;
 				this.$api.favorSearch(searchParams).then(res => {
 					let { data } = res;
-					this.searchListData = data;
+					this.searchListData = data.codeList;
 				});
 			}
 		}
