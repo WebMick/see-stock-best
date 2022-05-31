@@ -167,6 +167,7 @@
 			async init(){ 
 				this.wsCodeList = [];// 需要监听的code列表
 				await this.homeData();
+				await this.guessNewPool();
 				await this.equityMarket();
 				await this.getDataById();
 				await this.weekGuessCurren();
@@ -249,6 +250,14 @@
 					};
 					this.wsCodeList = this.stockListData;
 					this.wsSendCode(true);
+				});
+			},
+			// 竞猜记录
+			guessNewPool(){
+				this.$api.guessNewPool().then(res => {
+					let { data } = res;
+					let { pool } = data;
+					this.guessListData = pool;
 				});
 			},
 			// 上拉加载更多

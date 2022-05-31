@@ -3,6 +3,10 @@
 		<Navbar bgColor="none"></Navbar>
 		<view class="header" :style="{'padding-top': v_navBarHeight + 'px'}">
 			<image class="title" :src="$imgUrl('/images/equities/product/202112231427051854.png')" mode="" lazy-load="false" > </image>
+			<view class="record">
+				<image :src="$imgUrl('/images/equities/product/202205271442047185.png')" class="icon" mode=""></image>
+				<text class="text">竞猜记录</text>
+			</view>
 			<view class="bg"></view>
 		</view>
 		<view class="rankList">
