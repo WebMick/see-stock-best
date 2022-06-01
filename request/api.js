@@ -257,6 +257,14 @@ const rank = () => {
 	})
 }
 
+// 竞猜状态、数据
+const guessStockDetail = (data) => {
+	return request({
+		url: '/guess/stock/detail', 
+		method: 'GET',
+		data
+	})
+}
 
 
 const api = {
@@ -290,7 +298,8 @@ const api = {
 	cluesFollow,
 	cluesFollowDel,
 	cluesFollowClues,
-	rank
+	rank,
+	guessStockDetail
 }
 
 export{

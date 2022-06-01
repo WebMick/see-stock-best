@@ -16,9 +16,13 @@ export default {
 				share.path = fullPath;
 			}
 		}else{
-			let { target: { id } } = e;
-			if(id == ''){
-				
+			let { target: { id, dataset } } = e;
+			if(id == 'fabShare'){
+				console.log({e})
+				let { name, ratio } = dataset.params;
+				let title = `我正在看[${name}](${ratio}%)`
+				share.title = title;
+				share.imageUrl = ''
 			}else{
 				share.path = fullPath;
 			}

@@ -39,6 +39,24 @@
 					/> 
 			</view>
 			<view class="insetBottom"></view>
+			<!-- 小浮窗 -->
+			<Fab 
+				:fabData.sync="fabData" 
+				@init="init"
+				@noteInputShow="noteInputShow"
+				/>
+			<!-- 笔记输入框 -->
+			<u-popup :show="isShowNoteInput" 
+				:round="16" 
+				:closeable="true" 
+				:closeOnClickOverlay="false"
+				@close="noteInputShow" 
+				mode="bottom">
+				<NoteInput 
+					ref="noteInput"
+					:commonInfo="fabData"
+					/>
+			</u-popup>
 		</template>
 	</view>
 </template>
@@ -51,6 +69,8 @@
 	import Subpage from './components/Subpage/index.vue';
 	import ComponentStock from './components/ComponentStock.vue';
 	import NoticeBar from './components/NoticeBar.vue';
+	import Fab from './components/Fab.vue';
+	import NoteInput from './components/NoteInput.vue';
 	export default {
 		components: {
 			NumBox,
@@ -58,7 +78,9 @@
 			MustSee,
 			ComponentStock,
 			Subpage,
-			NoticeBar
+			NoticeBar,
+			Fab,
+			NoteInput
 		},
 		computed: {
 			...mapGetters(['v_navBarHeight', 'v_systemInfo']),
@@ -81,6 +103,24 @@
 					top = `calc(100vh - env(safe-area-inset-bottom) - 100rpx)`
 				}
 				return top;
+			},
+			// + 浮窗数据
+			fabData(){
+				let { equitySecurityInfoData } = this;
+				let data;
+				if(equitySecurityInfoData){
+					let { common_info, base_info, minute_line } = equitySecurityInfoData;
+					data = {
+						code: common_info.code,
+						type: common_info.type,
+						name: common_info.name,
+						user_have_favor: common_info.user_have_favor,
+						new_price: base_info.new_price,
+						range_ratio: base_info.range_ratio,
+						minute_line: minute_line[minute_line.length - 1]
+					};
+				}
+				return data;
 			}
 		},
 		onLoad(options) {
@@ -96,7 +136,8 @@
 				code: '', // 股票code
 				equitySecurityInfoData: '', // 当前股票数据
 				equityBigInfoData: '', // 必看数据
-				isShowSubpage: false
+				isShowSubpage: false,
+				isShowNoteInput: false, // 输入笔记
 			};
 		},
 		methods: {
@@ -109,6 +150,7 @@
 				this.$api.equitySecurityInfo({code}).then(res => {
 					let { data } = res;
 					this.equitySecurityInfoData = data;
+					this.$forceUpdate()
 				});
 			},
 			equityBigInfo(){
@@ -120,6 +162,18 @@
 			},
 			isShowSubpageFn(){
 				this.isShowSubpage = !this.isShowSubpage;
+			},
+			noteInputShow(){
+				this.isShowNoteInput = !this.isShowNoteInput;
+				// 关闭弹窗的时候 操作一下 输入框的内容
+				if(this.$refs.noteInput){
+					setTimeout(()=>{
+						this.$refs.noteInput.getFocus(this.isShowNoteInput);
+						if(!this.isShowNoteInput){
+							this.$refs.noteInput.reset();
+						}
+					},10)
+				}
 			}
 		}
 	}
