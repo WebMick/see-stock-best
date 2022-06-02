@@ -61,21 +61,19 @@
 			},
 			// 添加、删除自选
 			addOrDel(){
-				let { user_have_favor, code } = this.fabData;
+				let { user_have_favor, user_have_favor_id, code } = this.fabData;
 				if(user_have_favor){
 					uni.showModal({
 						content: '确定要删除该自选股吗?',
 						success: (res) => {
 							let { confirm } = res;
 							if(confirm){
-								this.$api.favorDelete({ids: [code]}).then(res => {
+								this.$api.favorDelete({ids: [user_have_favor_id]}).then(res => {
 									uni.showToast({
 										title: '已成功删除该自选股！',
 										icon: 'none'
 									});
-									let { fabData } = this;
-									fabData.user_have_favor = false;
-									this.$emit('update:fabData', fabData);
+									this.$emit('init');
 								});
 							}
 						}
@@ -86,9 +84,7 @@
 							title: '已成功添加该自选股！',
 							icon: 'none'
 						})
-						let { fabData } = this;
-						fabData.user_have_favor = true;
-						this.$emit('update:fabData', fabData);
+						this.$emit('init');
 					});
 				};
 			},

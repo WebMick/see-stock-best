@@ -42,7 +42,7 @@
 			<view class="insetBottom"></view>
 			<!-- 小浮窗 -->
 			<Fab 
-				:fabData.sync="fabData" 
+				:fabData="fabData" 
 				:minuteNewPrice="minuteNewPrice"
 				@init="init"
 				@noteInputShow="noteInputShow"
@@ -151,6 +151,7 @@
 					if(data){
 						let { common_info, base_info } = data;
 						this.fabData = {
+							user_have_favor_id:  common_info.user_have_favor_id,
 							code: common_info.code,
 							type: common_info.type,
 							name: common_info.name,
