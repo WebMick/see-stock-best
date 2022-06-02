@@ -16,9 +16,8 @@
 				/>
 			<template v-if="equityBigInfoData.point.content">
 				<NoticeBar 
-				:text="equityBigInfoData.point.content"
-				
-				/>
+					:text="equityBigInfoData.point.content"
+					/>
 			</template>
 				
 			<template v-if="equitySecurityInfoData.common_info.type == 1">
@@ -142,6 +141,8 @@
 			init(){
 				this.equitySecurityInfo();
 				this.equityBigInfo();
+				// 发起监听
+				this.wsSendMsg('join-market', {code: this.code})
 			},
 			equitySecurityInfo(){
 				let { code } = this;
@@ -181,7 +182,22 @@
 						}
 					},10)
 				}
+			},
+			// ws 数据
+			wsOnMsg(res){
+				let [event] = res;
+				if(event == 'market-msg'){
+					let [, data] = res;
+					let { data: { base_info, minute_line} } = data;
+					this.equitySecurityInfoData.base_info = base_info;
+					if(this.equitySecurityInfoData.minute_line){
+						// this.equitySecurityInfoData.minute_line.push(minute_line);
+					}
+				}
 			}
+		},
+		onUnload() {
+			this.wsSendMsg('leave-market', {code: this.code})
 		}
 	}
 </script>

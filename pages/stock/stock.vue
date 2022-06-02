@@ -500,6 +500,9 @@
 					url
 				});
 			}
+		},
+		onHide() {
+			this.wsSendCode(false);
 		}
 	}
 </script>
