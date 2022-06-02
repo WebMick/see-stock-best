@@ -95,12 +95,10 @@
 	import GuessList from './components/GuessList.vue';
 	import WeekGuess from './components/WeekGuess.vue';
 	import Clues from './components/Clues/index.vue';
-	import webSocketMixins from '@/request/webSocketMixins.vue';
 	export default {
 		computed: {
 			...mapGetters(['v_navBarHeight'])
 		},
-		mixins: [webSocketMixins],
 		components: {
 			FirstTabs,
 			History,

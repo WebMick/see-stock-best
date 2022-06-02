@@ -17,6 +17,7 @@
 			<template v-if="equityBigInfoData.point.content">
 				<NoticeBar 
 				:text="equityBigInfoData.point.content"
+				
 				/>
 			</template>
 				

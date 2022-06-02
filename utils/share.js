@@ -22,7 +22,8 @@ export default {
 				let { name, minuteNewPrice } = dataset.params;
 				let { length } = minuteNewPrice;
 				let ratio = minuteNewPrice[length - 1];
-				let title = `我正在看[${name}](${ratio}%)`
+				let price = minuteNewPrice[1];
+				let title = `我正在看[${name}](${price}  ${ratio}%)`
 				share.title = title;
 				share.imageUrl = ''
 			}else{
