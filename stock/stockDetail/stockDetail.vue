@@ -42,6 +42,7 @@
 			<!-- 小浮窗 -->
 			<Fab 
 				:fabData.sync="fabData" 
+				:minuteNewPrice="minuteNewPrice"
 				@init="init"
 				@noteInputShow="noteInputShow"
 				/>
@@ -55,6 +56,8 @@
 				<NoteInput 
 					ref="noteInput"
 					:commonInfo="fabData"
+					:minuteNewPrice="minuteNewPrice"
+					@close="noteInputShow"
 					/>
 			</u-popup>
 		</template>
@@ -104,21 +107,14 @@
 				}
 				return top;
 			},
-			// + 浮窗数据
-			fabData(){
+			// 最新价格
+			minuteNewPrice(){
 				let { equitySecurityInfoData } = this;
 				let data;
 				if(equitySecurityInfoData){
-					let { common_info, base_info, minute_line } = equitySecurityInfoData;
-					data = {
-						code: common_info.code,
-						type: common_info.type,
-						name: common_info.name,
-						user_have_favor: common_info.user_have_favor,
-						new_price: base_info.new_price,
-						range_ratio: base_info.range_ratio,
-						minute_line: minute_line[minute_line.length - 1]
-					};
+					let { minute_line, base_info: { range_ratio } } = equitySecurityInfoData;
+					data = minute_line[minute_line.length - 1];
+					data.push(range_ratio);
 				}
 				return data;
 			}
@@ -138,6 +134,7 @@
 				equityBigInfoData: '', // 必看数据
 				isShowSubpage: false,
 				isShowNoteInput: false, // 输入笔记
+				fabData: '', //  + 浮窗数据
 			};
 		},
 		methods: {
@@ -150,7 +147,15 @@
 				this.$api.equitySecurityInfo({code}).then(res => {
 					let { data } = res;
 					this.equitySecurityInfoData = data;
-					this.$forceUpdate()
+					if(data){
+						let { common_info, base_info } = data;
+						this.fabData = {
+							code: common_info.code,
+							type: common_info.type,
+							name: common_info.name,
+							user_have_favor: common_info.user_have_favor
+						};
+					}
 				});
 			},
 			equityBigInfo(){

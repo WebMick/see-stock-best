@@ -266,6 +266,15 @@ const guessStockDetail = (data) => {
 	})
 }
 
+// 提交笔记 
+const equityCommitNote = (data) => {
+	return request({
+		url: '/equity/commit/note', 
+		data
+	})
+}
+
+
 
 const api = {
 	login,
@@ -299,7 +308,8 @@ const api = {
 	cluesFollowDel,
 	cluesFollowClues,
 	rank,
-	guessStockDetail
+	guessStockDetail,
+	equityCommitNote
 }
 
 export{

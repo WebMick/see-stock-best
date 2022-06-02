@@ -17,7 +17,7 @@
 					<image :src="$imgUrl('/images/equities/product/202206011423311535.png')" class="icon" mode=""></image>
 					<view class="text">猜涨跌</view>
 				</view>
-				<button open-type="share" id="fabShare" :data-params="fabData" class="btnItem">
+				<button open-type="share" id="fabShare" :data-params="{...fabData, minuteNewPrice}" class="btnItem">
 					<image :src="$imgUrl('/images/equities/product/202206011144076760.png')" class="icon" mode=""></image>
 					<view class="text">去分享</view>
 				</button>
@@ -37,6 +37,10 @@
 				default: function(){
 					return {}
 				}
+			},
+			minuteNewPrice: {
+				type: Array,
+				default: () => []
 			}
 		},
 		data(){
@@ -69,7 +73,9 @@
 										title: '已成功删除该自选股！',
 										icon: 'none'
 									});
-									this.$emit('init');
+									let { fabData } = this;
+									fabData.user_have_favor = false;
+									this.$emit('update:fabData', fabData);
 								});
 							}
 						}
@@ -80,7 +86,9 @@
 							title: '已成功添加该自选股！',
 							icon: 'none'
 						})
-						this.$emit('init');
+						let { fabData } = this;
+						fabData.user_have_favor = true;
+						this.$emit('update:fabData', fabData);
 					});
 				};
 			},

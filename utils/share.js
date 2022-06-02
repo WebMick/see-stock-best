@@ -19,7 +19,9 @@ export default {
 			let { target: { id, dataset } } = e;
 			if(id == 'fabShare'){
 				console.log({e})
-				let { name, ratio } = dataset.params;
+				let { name, minuteNewPrice } = dataset.params;
+				let { length } = minuteNewPrice;
+				let ratio = minuteNewPrice[length - 1];
 				let title = `我正在看[${name}](${ratio}%)`
 				share.title = title;
 				share.imageUrl = ''

@@ -3,11 +3,11 @@
 		<view class="title">
 			<template v-if="sign == 1">
 				<image :src="$imgUrl('/images/equities/product/202202081338321194.png')" class="icon" mode=""></image>
-				<view class="text textUp">标记想买 <text class="num fontRegular">{{commonInfo.new_price}}</text></view>
+				<view class="text textUp">标记想买 <text class="num fontRegular">{{price}}</text></view>
 			</template>
 			<template v-if="sign == 2">
 				<image :src="$imgUrl('/images/equities/product/202202081338491739.png')" class="icon" mode=""></image>
-				<view class="text textDown">标记想卖 <text class="num fontRegular">{{commonInfo.new_price}}</text></view>
+				<view class="text textDown">标记想卖 <text class="num fontRegular">{{price}}</text></view>
 			</template>
 		</view>
 		<view class="iptBox">
@@ -37,7 +37,7 @@
 					</view>
 				</template>
 			</view>
-			<view class="btnSave" :class="{dis: !content}">保存</view>
+			<view class="btnSave" @click="save" :class="{dis: !content}">保存</view>
 		</view>
 	</view>
 </template>
@@ -51,10 +51,16 @@
 				default: function(){
 					return {}
 				}
+			},
+			minuteNewPrice: {
+				type: Array,
+				default: () => []
 			}
 		},
 		data(){
 			return {
+				price: '',
+				time: '',
 				isFocus: false,
 				content: '',
 				keyHeight: 0,
@@ -76,6 +82,10 @@
 			},
 			signHandler(sign){
 				this.sign = this.sign == sign ? 0 : sign;
+				if(this.sign){
+					this.price = this.minuteNewPrice[1];
+					this.time = this.minuteNewPrice[0];
+				}
 			},
 			reset(){
 				uni.offKeyboardHeightChange();
@@ -84,8 +94,31 @@
 				this.keyHeight = 0;
 				this.sign = 0;
 			},
+			// 提交笔记
 			save(){
-				let { sign, content, commonInfo } =  this;
+				let { sign, content, commonInfo: { code }, price, time } =  this;
+				let params = {
+					type: sign,
+					content,
+					price,
+					time,
+					code
+				};
+				if(!time){
+					params.time = this.minuteNewPrice[0];
+				}
+				this.$api.equityCommitNote(params).then(res => {
+					let { code } = res;
+					if(code == 0){
+						uni.showToast({
+							title: '笔记发布成功！',
+							icon: 'none',
+							success: () => {
+								this.$emit('close');
+							}
+						})
+					}
+				});
 			}
 		}
 	}
