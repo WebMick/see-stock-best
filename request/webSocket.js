@@ -18,7 +18,7 @@ export default{
 			// 无token处理
 			if(token){
 				clearTimeout(timer);
-				// 创建之前 判断是否已连接
+				// 是否已连接
 				if(!isOpen){
 					let url = APIROOT.wss;
 					uni.connectSocket({
