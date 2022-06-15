@@ -64,11 +64,11 @@
             "path" : "clues/myClues/myClues",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "我的自选组合",
-				"navigationBarBackgroundColor": "#fff",
-                "enablePullDownRefresh": false
+               "navigationStyle": "custom",
+               "app-plus":{
+               	"titleView":false
+               }
             }
-            
         }
         ,{
             "path" : "activity/guessRank/guessRank",
@@ -79,7 +79,6 @@
                	"titleView":false
                }
             }
-            
         }
     ],
 	"globalStyle": {

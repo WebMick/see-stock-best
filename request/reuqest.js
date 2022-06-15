@@ -17,13 +17,13 @@ const request = ({url, data, method = 'POST', type = 'api', requestType = 'reque
 	let header = setHeader(data);
 	let key;
 	if(encryption){
+		key = randomString(32);
+		header.swkey = RSAEncrypt( key );
 		if(data && JSON.stringify(data) != '{}'){
-			key = randomString(32);
 			data = {
 				param: JSON.stringify(data)
 			}
 			data = AesEncrypt(JSON.stringify(data), key);
-			header.swkey =  RSAEncrypt( key );
 			data = {
 				param: data
 			}
