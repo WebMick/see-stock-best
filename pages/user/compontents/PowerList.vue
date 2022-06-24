@@ -39,7 +39,8 @@
 					5: '/images/equities/privilege/5/xinxiu.png',
 					6: '/images/equities/privilege/6/xinxiu.png',
 					7: '/images/equities/privilege/7/xinxiu.png',
-					8: '/images/equities/privilege/8/xinxiu.png'
+					8: '/images/equities/privilege/8/xinxiu.png',
+					9: '/images/equities/privilege/9/xinxiu.png'
 				}
 			}
 		},

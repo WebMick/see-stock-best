@@ -492,6 +492,7 @@
 					else if(tabsCurrent == 3){
 						this.weekGuessListData = list;
 					}
+					list = null;
 				}
 			},
 			// 页面跳转

@@ -120,7 +120,11 @@
 						this.klineData = data.data;
 						let { length } = data.data;
 						this.moveShowData = data.data[length - 1];
-						this.startIndex   = length - xAxisLen;
+						if(length <= xAxisLen){
+							this.startIndex = 0;
+						}else{
+							this.startIndex = length - xAxisLen;
+						}
 						this.init();
 						clearTimeout(timer);
 					})

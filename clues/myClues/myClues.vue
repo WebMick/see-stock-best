@@ -1,7 +1,17 @@
 <template>
 	<view class="myClues page" :style="{'padding-top': v_navBarHeight + 'px'}">
 		<Navbar bgColor="#fff9f1" title="我的自选组合"></Navbar>
-		<GroupList :listData="groupListData"></GroupList>
+		<template v-if="groupListData && groupListData.length > 0">
+			<GroupList :listData.sync="groupListData"></GroupList>
+			<view class="tips">提示：长按可删除自选组合</view>
+		</template>
+		<template v-else>
+			<Empty
+				height="500rpx"
+				title="暂无线索组合"
+				subTitle="请添加更多线索组合"
+				/>
+		</template>
 	</view>
 </template>
 
@@ -21,7 +31,7 @@
 				groupListData: []
 			};
 		},
-		onShow(){
+		onLoad(){
 			this.init();
 		},
 		methods: {
